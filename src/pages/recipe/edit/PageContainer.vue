@@ -1,5 +1,14 @@
 <template>
-  <recipe-edit-page v-bind="{ recipe, recipeError, onUpdateRecipe, onAddIngredient, onSave, onRemoveIngredient }" />
+  <recipe-edit-page
+    v-bind="{
+      recipe,
+      recipeError,
+      onUpdateRecipe,
+      onAddIngredient,
+      onSave,
+      onRemoveIngredient,
+    }"
+  />
 </template>
 
 <script lang="ts">
@@ -42,7 +51,6 @@ export default Vue.extend({
           const recipe = mapRecipeVmToModel(this.recipe);
           save(recipe)
             .then((message) => {
-              console.log(message);
               this.$router.back();
             })
             .catch((error) => console.log(error));
@@ -64,12 +72,16 @@ export default Vue.extend({
     onRemoveIngredient(ingredient: string) {
       this.recipe = {
         ...this.recipe,
-        ingredients: this.recipe.ingredients.filter((item) => item !== ingredient),
+        ingredients: this.recipe.ingredients.filter(
+          (item) => item !== ingredient
+        ),
       };
       this.validateRecipeField("ingredients", this.recipe.ingredients);
     },
     validateRecipeField(field, value) {
-      validations.validateField(field, value).then((result) => this.updateRecipeError(field, result));
+      validations
+        .validateField(field, value)
+        .then((result) => this.updateRecipeError(field, result));
     },
     updateRecipeError(field, result) {
       this.recipeError = {

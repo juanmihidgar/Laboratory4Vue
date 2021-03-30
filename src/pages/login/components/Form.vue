@@ -15,7 +15,9 @@
       @input="(password) => updateLogin('password', password)"
       @blur="() => updateLogin('password', login.password)"
     />
-    <v-btn type="submit" color="info" @click.prevent="handleOnClick">Login</v-btn>
+    <v-btn type="submit" color="info" @click.prevent="handleOnClick"
+      >Login</v-btn
+    >
   </v-form>
 </template>
 

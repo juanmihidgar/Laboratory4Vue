@@ -17,39 +17,37 @@ export default Vue.extend({
   data() {
     return {
       login: createEmptyLogin(),
-      loginError: createEmptyLoginError()
+      loginError: createEmptyLoginError(),
     };
   },
   methods: {
     updateLogin(field: string, value: string) {
       this.login = {
         ...this.login,
-        [field]: value
+        [field]: value,
       };
 
-      validation.validateField(field, value).then(result => {
+      validation.validateField(field, value).then((result) => {
         this.loginError = {
           ...this.loginError,
-          [field]: result
+          [field]: result,
         };
       });
     },
     loginRequest() {
-      validation.validateForm(this.login).then(result => {
+      validation.validateForm(this.login).then((result) => {
         if (result.succeeded) {
-
           const loginModel = mapLoginVMToModel(this.login);
+
           loginRequest(loginModel)
             .then(() => {
               this.$router.push(baseRoutes.recipe);
             })
-            .catch(error =>
+            .catch((error) =>
               alert(
                 `Este mensaje debes implementarlo con el componente Snackbar de Vuetify ;) => ${error}`
               )
             );
-
-
         } else {
           this.loginError = {
             ...this.loginError,
@@ -57,7 +55,7 @@ export default Vue.extend({
           };
         }
       });
-    }
-  }
+    },
+  },
 });
 </script>

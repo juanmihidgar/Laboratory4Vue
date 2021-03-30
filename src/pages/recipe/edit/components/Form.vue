@@ -4,7 +4,7 @@
       filled
       label="Name"
       :value="recipe.name"
-      :rules="[resultRecipeError]"
+      :rules="[resultRecipeNameError]"
       @input="(name) => onUpdateRecipe('name', name)"
       @click:append="onAddIngredient(ingredient)"
     />
@@ -18,11 +18,17 @@
       @click:append="onAddIngredient(ingredient)"
     />
 
-    <ingredient-list-component :ingredients="recipe.ingredients" :on-remove-ingredient="onRemoveIngredient" />
+    <ingredient-list-component
+      :ingredients="recipe.ingredients"
+      :on-remove-ingredient="onRemoveIngredient"
+    />
 
-    <v-alert :value="!recipeError.ingredients.succeeded" color="error" outlined>{{
-      recipeError.ingredients.message
-    }}</v-alert>
+    <v-alert
+      :value="!recipeError.ingredients.succeeded"
+      color="error"
+      outlined
+      >{{ recipeError.ingredients.message }}</v-alert
+    >
 
     <v-textarea
       label="Description"
@@ -30,6 +36,7 @@
       placeholder="Description...."
       rows="10"
       :value="recipe.description"
+      :rules="[resultRecipeDescriptionError]"
       :no-resize="true"
       @input="(value) => onUpdateRecipe('description', value)"
     ></v-textarea>
@@ -60,8 +67,14 @@ export default Vue.extend({
     };
   },
   computed: {
-    resultRecipeError(): boolean | string {
+    resultRecipeNameError(): boolean | string {
       return this.recipeError.name.succeeded || this.recipeError.name.message;
+    },
+    resultRecipeDescriptionError(): boolean | string {
+      return (
+        this.recipeError.description.succeeded ||
+        this.recipeError.description.message
+      );
     },
   },
 });
