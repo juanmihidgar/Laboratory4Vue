@@ -2,8 +2,8 @@
   <thead>
     <th>Name</th>
     <th>Description</th>
-    <th>      
-    </th>
+    <th>Image</th>
+    <th></th>
   </thead>
 </template>
 

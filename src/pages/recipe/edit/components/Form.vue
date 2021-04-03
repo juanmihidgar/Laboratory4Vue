@@ -40,7 +40,15 @@
       :no-resize="true"
       @input="(value) => onUpdateRecipe('description', value)"
     ></v-textarea>
-
+    <v-text-field
+      filled
+      label="Image URL"
+      :value="recipe.image"
+      @change="(image) => onUpdateRecipe('image', image)"
+    />
+    <div v-if="recipe.image" class="imageContainer">
+      <img :src="recipe.image" />
+    </div>
     <v-btn type="button" color="success" @click.prevent="onSave">Save</v-btn>
   </v-form>
 </template>
@@ -79,3 +87,18 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scooped>
+.imageContainer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  height: 15rem;
+  background: rgba(0, 0, 0, 0.12);
+  margin-top: -2rem;
+  padding: 1rem;
+}
+.imageContainer img {
+  border-radius: 3rem;
+}
+</style>

@@ -6,6 +6,9 @@
     <td :class="$style.description">
       <span>{{ recipe.description }}</span>
     </td>
+    <td :class="$style.imageField">
+      <img :class="$style.image" :src="recipe.image" />
+    </td>
     <td :class="$style.editButton">
       <v-btn text icon :to="routeEdit">
         <v-icon>edit</v-icon>
@@ -27,7 +30,7 @@ export default Vue.extend({
   computed: {
     routeEdit(): string {
       return `${baseRoutes.recipe}/${this.recipe.id}`;
-    }
+    },
   },
 });
 </script>
@@ -39,6 +42,15 @@ export default Vue.extend({
 
 .description {
   max-width: 177px;
+}
+.imageField {
+  display: flex;
+  justify-content: center;
+}
+.image {
+  max-height: 3rem;
+  max-width: 3rem;
+  margin: 0 auto;
 }
 
 .description span {

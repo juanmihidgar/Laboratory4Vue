@@ -39,6 +39,7 @@ export default Vue.extend({
   },
   methods: {
     onUpdateRecipe(field: string, value: string) {
+      console.log(this.recipe, field, value);
       this.recipe = {
         ...this.recipe,
         [field]: value,
