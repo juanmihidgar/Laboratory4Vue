@@ -49,7 +49,17 @@
     <div v-if="recipe.image" class="imageContainer">
       <img :src="recipe.image" />
     </div>
-    <v-btn type="button" color="success" @click.prevent="onSave">Save</v-btn>
+    <v-btn
+      type="button"
+      color="success"
+      :disabled="
+        !this.recipeError.name.succeeded ||
+          !this.recipeError.description.succeeded ||
+          recipe.ingredients.length == 0
+      "
+      @click.prevent="onSave"
+      >Save</v-btn
+    >
   </v-form>
 </template>
 
@@ -97,6 +107,7 @@ export default Vue.extend({
   background: rgba(0, 0, 0, 0.12);
   margin-top: -2rem;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 .imageContainer img {
   border-radius: 3rem;

@@ -1,5 +1,10 @@
 <template>
-  <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+  <div>
+    <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+    <div>
+      <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,14 +15,18 @@ import LoginPage from "./Page.vue";
 import { createEmptyLogin, Login, createEmptyLoginError } from "./viewModel";
 import { mapLoginVMToModel } from "./mapper";
 import { validation } from "./validations";
+import { Snackbar } from "../../common/snackbar";
 
 export default Vue.extend({
   name: "PageLoginContainer",
-  components: { LoginPage },
+  components: { LoginPage, Snackbar },
   data() {
     return {
       login: createEmptyLogin(),
       loginError: createEmptyLoginError(),
+      showSnackbar: false,
+      snackText: "",
+      snackTimeout: 2000,
     };
   },
   methods: {
@@ -43,11 +52,13 @@ export default Vue.extend({
             .then(() => {
               this.$router.push(baseRoutes.recipe);
             })
-            .catch((error) =>
-              alert(
-                `Este mensaje debes implementarlo con el componente Snackbar de Vuetify ;) => ${error}`
-              )
-            );
+            .catch((error) => {
+              this.snackText = `${error}. Try with user: admin password: test`;
+              this.showSnackbar = true;
+              setTimeout(() => {
+                this.showSnackbar = false;
+              }, this.snackTimeout);
+            });
         } else {
           this.loginError = {
             ...this.loginError,

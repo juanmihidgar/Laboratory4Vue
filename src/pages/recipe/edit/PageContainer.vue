@@ -1,14 +1,19 @@
 <template>
-  <recipe-edit-page
-    v-bind="{
-      recipe,
-      recipeError,
-      onUpdateRecipe,
-      onAddIngredient,
-      onSave,
-      onRemoveIngredient,
-    }"
-  />
+  <div>
+    <recipe-edit-page
+      v-bind="{
+        recipe,
+        recipeError,
+        onUpdateRecipe,
+        onAddIngredient,
+        onSave,
+        onRemoveIngredient,
+      }"
+    />
+    <div>
+      <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,15 +23,19 @@ import { fetchRecipeById, save } from "../../../rest-api/api/recipe";
 import { mapRecipeModelToVm, mapRecipeVmToModel } from "./mapper";
 import { createEmptyRecipe, createEmptyRecipeError } from "./viewModel";
 import { validations } from "./validations";
+import { Snackbar } from "../../../common/snackbar";
 
 export default Vue.extend({
   name: "RecipeEditPageContainer",
-  components: { RecipeEditPage },
+  components: { RecipeEditPage, Snackbar },
   props: { id: String },
   data() {
     return {
       recipe: createEmptyRecipe(),
       recipeError: createEmptyRecipeError(),
+      showSnackbar: false,
+      snackText: "",
+      snackTimeout: 2000,
     };
   },
   beforeMount() {
@@ -35,11 +44,16 @@ export default Vue.extend({
       .then((recipe) => {
         this.recipe = mapRecipeModelToVm(recipe);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        this.snackText = error;
+        this.showSnackbar = true;
+        setTimeout(() => {
+          this.showSnackbar = false;
+        }, this.snackTimeout);
+      });
   },
   methods: {
     onUpdateRecipe(field: string, value: string) {
-      console.log(this.recipe, field, value);
       this.recipe = {
         ...this.recipe,
         [field]: value,
@@ -54,7 +68,13 @@ export default Vue.extend({
             .then((message) => {
               this.$router.back();
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              this.snackText = `Saving error: ${error}`;
+              this.showSnackbar = true;
+              setTimeout(() => {
+                this.showSnackbar = false;
+              }, this.snackTimeout);
+            });
         } else {
           this.recipeError = {
             ...this.recipeError,
