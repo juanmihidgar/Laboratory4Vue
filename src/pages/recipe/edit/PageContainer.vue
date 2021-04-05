@@ -10,9 +10,7 @@
         onRemoveIngredient,
       }"
     />
-    <div>
-      <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
-    </div>
+    <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
   </div>
 </template>
 

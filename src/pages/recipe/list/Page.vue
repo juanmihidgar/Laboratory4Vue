@@ -6,7 +6,11 @@
       </v-card-title>
       <v-card-text>
         <search-bar-component :search-text="searchText" :on-search="onSearch" />
-        <table-component :recipes="recipes" />
+        <table-component
+          :headers="headers"
+          :search-text="searchText"
+          :recipes="recipes"
+        />
       </v-card-text>
     </v-card>
   </app-layout>
@@ -24,6 +28,7 @@ export default Vue.extend({
   props: {
     recipes: { required: true } as PropOptions<Recipe[]>,
     searchText: String,
+    headers: { required: true } as PropOptions,
     onSearch: { required: true } as PropOptions<(value: string) => void>,
   },
 });

@@ -11,7 +11,8 @@ export const mockRecipes: Recipe[] = [
      4. Using a spatula, ease around the edges of the omelette, then fold it over in half. When it starts to turn golden brown underneath, remove the pan from the heat and slide the omelette on to a plate.
     `,
     ingredients: ["2 eggs", "cheese", "salt", "black pepper"],
-    image: "https://static.thenounproject.com/png/140281-200.png",
+    image:
+      "https://img1.freepng.es/20180421/daw/kisspng-omelette-vegetarian-cuisine-pizza-french-fries-bre-omelette-5adade4c4ab928.8656117515242931963061.jpg",
   },
   {
     id: 2,
@@ -31,7 +32,8 @@ export const mockRecipes: Recipe[] = [
       "salt",
       "pepper",
     ],
-    image: "https://static.thenounproject.com/png/140281-200.png",
+    image:
+      "https://img2.freepng.es/20180627/wes/kisspng-greek-salad-caesar-salad-pasta-salad-recipe-prawns-5b331464b96e19.7401754715300742127595.jpg",
   },
   {
     id: 3,
@@ -51,6 +53,7 @@ export const mockRecipes: Recipe[] = [
       "oregano",
       "salt",
     ],
-    image: "https://static.thenounproject.com/png/140281-200.png",
+    image:
+      "https://e7.pngegg.com/pngimages/392/743/png-clipart-pasta-pasta.png",
   },
 ];

@@ -1,9 +1,8 @@
 <template>
   <div>
     <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
-    <div>
-      <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
-    </div>
+
+    <Snackbar v-bind="{ showSnackbar, snackText, snackTimeout }" />
   </div>
 </template>
 

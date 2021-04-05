@@ -47,7 +47,10 @@
       @change="(image) => onUpdateRecipe('image', image)"
     />
     <div v-if="recipe.image" class="imageContainer">
-      <img :src="recipe.image" />
+      <img
+        :src="recipe.image"
+        onerror="this.onerror=null; this.src='https://static.thenounproject.com/png/140281-200.png'"
+      />
     </div>
     <v-btn
       type="button"
